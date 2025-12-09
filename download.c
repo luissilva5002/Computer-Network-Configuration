@@ -1,3 +1,4 @@
+#define _POSIX_C_SOURCE 200809L
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -107,7 +108,7 @@ int connect_to_host(const char *hostname, uint16_t port) {
     if (!host)
         return -1;
 
-    const char *ip = inet_ntoa(*((struct in_addr *) host->h_addr));
+    const char *ip = inet_ntoa(*((struct in_addr *) host->h_addr_list[0]));
     return connect_to_address(ip, port);
 }
 
@@ -324,3 +325,5 @@ int main(int argc, char **argv) {
     printf("Download completed successfully.\n");
     return 0;
 }
+
+
